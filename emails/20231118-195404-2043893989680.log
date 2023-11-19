@@ -1,0 +1,24 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: [127.0.0.1:8000] Password Reset E-mail
+From: webmaster@localhost
+To: burluudaysantoshkumar3@gmail.com
+Date: Sat, 18 Nov 2023 14:24:04 -0000
+Message-ID: <170031744401.10428.9471082173272498089@UDAYSK>
+
+Hello from 127.0.0.1:8000!
+
+You are receiving this e-mail because you or someone else has requested a
+password for your user account. However, we do not have any record of a user
+with email burluudaysantoshkumar3@gmail.com in our database.
+
+This mail can be safely ignored if you did not request a password reset.
+
+If it was you, you can sign up for an account using the link below.
+
+http://127.0.0.1:8000/accounts/signup/
+
+Thank you for using 127.0.0.1:8000!
+127.0.0.1:8000
+-------------------------------------------------------------------------------

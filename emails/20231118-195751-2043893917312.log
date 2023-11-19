@@ -1,0 +1,18 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: [127.0.0.1:8000] Please Confirm Your E-mail Address
+From: webmaster@localhost
+To: tarun@gmail.com
+Date: Sat, 18 Nov 2023 14:27:51 -0000
+Message-ID: <170031767151.10428.1008835779099455515@UDAYSK>
+
+Hello from 127.0.0.1:8000!
+
+You're receiving this e-mail because user tarun has given your e-mail address to register an account on 127.0.0.1:8000.
+
+To confirm this is correct, go to http://127.0.0.1:8000/accounts/confirm-email/MQ:1r4MIZ:J_xGEez0Rr52NUImYeKhVCJ_JKhwKUhWVUmbmWH7ny4/
+
+Thank you for using 127.0.0.1:8000!
+127.0.0.1:8000
+-------------------------------------------------------------------------------
