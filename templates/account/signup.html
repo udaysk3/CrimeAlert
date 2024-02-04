@@ -53,11 +53,20 @@
                             <label for="user_type" class="form-label">User Type: </label>
                             {%render_field form.user_type %}
                         </div>
+                        <div class="mb-3">
+                            <label for="latitude" class="form-label">Latitude</label>
+                            <input type="text" id="latitude" name="latitude" class="form-control" placeholder="Latitude" readonly>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="longitude" class="form-label">Longitude</label>
+                            <input type="text" id="longitude" name="longitude" class="form-control" placeholder="Longitude" readonly>
+                        </div>
 
                         {% if redirect_field_value %}
                             <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
                         {% endif %}
-
+                        <input type="hidden" id="user_district" name="user_district">
                         <div class="form-footer">
                             <button type="submit" class="btn btn-primary btn-block">Sign up</button>
                         </div>
@@ -66,5 +75,24 @@
             </div>
         </div>
     </div>
-</div>
+</div><!-- Add these lines within the <script> tag or in a separate JavaScript file -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            if ("geolocation" in navigator) {
+                navigator.geolocation.getCurrentPosition(
+                    function (position) {
+                        // Update the latitude and longitude input fields
+                        document.getElementById("latitude").value = position.coords.latitude;
+                        document.getElementById("longitude").value = position.coords.longitude;
+                    },
+                    function (error) {
+                        console.error("Error getting user's location:", error.message);
+                    }
+                );
+            } else {
+                console.error("Geolocation is not supported by this browser.");
+            }
+        });
+    </script>
+    
 {% endblock content %}

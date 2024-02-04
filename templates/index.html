@@ -3,8 +3,12 @@
 {% load static %}
 {% block content %}
 
-    <!-- end header section -->
-    <!-- slider section -->
+    <div class="hero_bg_box">
+      <div class="bg_img_box">
+        <img src='{% static 'images/hero-bg.png' %}'  alt="">
+      </div>
+    </div>
+
     <section class="slider_section ">
       <div id="customCarousel1" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
@@ -35,7 +39,7 @@
               </div>
             </div>
           </div>
-          <div class="carousel-item ">
+          <div class="carousel-item">
             <div class="container ">
               <div class="row">
                 <div class="col-md-6 ">
@@ -45,10 +49,10 @@
                       Statistics
                     </h1>
                     <p>
-                      Explicabo esse amet tempora quibusdam laudantium, laborum eaque magnam fugiat hic? Esse dicta aliquid error repudiandae earum suscipit fugiat molestias, veniam, vel architecto veritatis delectus repellat modi impedit sequi.
+                      Crime statistics quantify criminal activities in a specific area, providing metrics on crime types and frequency. Collected by law enforcement, these numbers inform strategies, resource allocation, and evidence-based decision-making for enhancing public safety and addressing community challenges.
                     </p>
                     <div class="btn-box">
-                      <a href="" class="btn1">
+                      <a href="/crimestatistics" class="btn1">
                         Read More
                       </a>
                     </div>
@@ -72,7 +76,7 @@
                       Reporting
                     </h1>
                     <p>
-                      Explicabo esse amet tempora quibusdam laudantium, laborum eaque magnam fugiat hic? Esse dicta aliquid error repudiandae earum suscipit fugiat molestias, veniam, vel architecto veritatis delectus repellat modi impedit sequi.
+                      Scam reporting is a feature that empowers users to report instances of fraud or deceptive activities within our app. Users can provide details about the scam, such as its nature and the involved parties, and enhance their reports by uploading supporting evidence like images or videos. 
                     </p>
                     <div class="btn-box">
                       <a href="" class="btn1">
@@ -112,7 +116,7 @@
             Our <span>Services</span>
           </h2>
           <p>
-            There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration
+            Our services offer scam reporting, crime prediction, and statistics, providing users with tools for reporting fraud, anticipating potential crimes, and accessing insights for informed decision-making and community safety.
           </p>
         </div>
         <div class="row">
@@ -123,16 +127,16 @@
               </div>
               <div class="detail-box">
                 <h5>
-                  Currency Wallet
+                  Crime Prediction
                 </h5>
                 <p>
-                  fact that a reader will be distracted by the readable content of a page when looking at its layout.
-                  The
-                  point of using
+                  Crime prediction in our app allows users to input date, time, and location, predicting  potential crime type at that place and time. This feature utilizes historical data  to offer insights, assisting users like police in making some informed decisions regarding safety and contributing to  crime prevention measures.
                 </p>
-                <a href="">
-                  Read More
-                </a>
+                <div class="btn-box">
+                  <a href="">
+                    Predict
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -143,16 +147,16 @@
               </div>
               <div class="detail-box">
                 <h5>
-                  Security Storage
+                  Crime Statistics
                 </h5>
                 <p>
-                  fact that a reader will be distracted by the readable content of a page when looking at its layout.
-                  The
-                  point of using
+                  Crime statistics quantify criminal activities in a specific area, providing metrics on crime types and frequency. Collected by law enforcement, these numbers inform strategies, resource allocation, and evidence-based decision-making for enhancing public safety and addressing community challenges.
                 </p>
-                <a href="">
-                  Read More
-                </a>
+                <div class="btn-box">
+                  <a href="/crimestatistics" >
+                    Analyze
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -163,25 +167,21 @@
               </div>
               <div class="detail-box">
                 <h5>
-                  Expert Support
+                  Scam Reporting 
                 </h5>
                 <p>
-                  fact that a reader will be distracted by the readable content of a page when looking at its layout.
-                  The
-                  point of using
+                  Scam reporting is a feature that empowers users to report instances of fraud or deceptive activities within our app. Users can provide details about the scam, such as its nature and the involved parties, and enhance their reports by uploading supporting evidence like images or videos. 
                 </p>
-                <a href="">
-                  Read More
-                </a>
+                <div class="btn-box">
+                  <a href="">
+                    Report
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="btn-box">
-          <a href="">
-            View All
-          </a>
-        </div>
+        
       </div>
     </div>
   </section>
