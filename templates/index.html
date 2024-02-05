@@ -119,12 +119,15 @@
             Our services offer scam reporting, crime prediction, and statistics, providing users with tools for reporting fraud, anticipating potential crimes, and accessing insights for informed decision-making and community safety.
           </p>
         </div>
-        <div class="row">
+        {% if request.session.user or user.is_authenticated %}
+         <div class="row">
+          {% if request.session.user %}
           <div class="col-md-4 ">
             <div class="box ">
               <div class="img-box">
                 <img src="{% static "images/s1.png" %}" alt="">
               </div>
+              
               <div class="detail-box">
                 <h5>
                   Crime Prediction
@@ -138,49 +141,64 @@
                   </a>
                 </div>
               </div>
+            
+            </div>
+            {% endif %}
+          </div>
+          <div class="col-md-4 ">
+            <div class="box ">
+              {% if request.session.user or user.is_authenticated %}
+                <div class="img-box">
+                  <img src="{% static "images/s2.png" %}" alt="">
+                </div>
+                <div class="detail-box">
+                  <h5>
+                    Crime Statistics
+                  </h5>
+                  <p>
+                    Crime statistics quantify criminal activities in a specific area, providing metrics on crime types and frequency. Collected by law enforcement, these numbers inform strategies, resource allocation, and evidence-based decision-making for enhancing public safety and addressing community challenges.
+                  </p>
+                  <div class="btn-box">
+                    <a href="/crimestatistics" >
+                      Analyze
+                    </a>
+                  </div>
+                </div>
+                {% endif %}
             </div>
           </div>
           <div class="col-md-4 ">
             <div class="box ">
-              <div class="img-box">
-                <img src="{% static "images/s2.png" %}" alt="">
-              </div>
-              <div class="detail-box">
-                <h5>
-                  Crime Statistics
-                </h5>
-                <p>
-                  Crime statistics quantify criminal activities in a specific area, providing metrics on crime types and frequency. Collected by law enforcement, these numbers inform strategies, resource allocation, and evidence-based decision-making for enhancing public safety and addressing community challenges.
-                </p>
-                <div class="btn-box">
-                  <a href="/crimestatistics" >
-                    Analyze
-                  </a>
+              {% if request.session.user or user.is_authenticated %}
+                <div class="img-box">
+                  <img src="{% static "images/s3.png" %}" alt="">
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 ">
-            <div class="box ">
-              <div class="img-box">
-                <img src="{% static "images/s3.png" %}" alt="">
-              </div>
-              <div class="detail-box">
-                <h5>
-                  Scam Reporting 
-                </h5>
-                <p>
-                  Scam reporting is a feature that empowers users to report instances of fraud or deceptive activities within our app. Users can provide details about the scam, such as its nature and the involved parties, and enhance their reports by uploading supporting evidence like images or videos. 
-                </p>
-                <div class="btn-box">
-                  <a href="">
-                    Report
-                  </a>
+                <div class="detail-box">
+                  <h5>
+                    Scam Reporting 
+                  </h5>
+                  <p>
+                    Scam reporting is a feature that empowers users to report instances of fraud or deceptive activities within our app. Users can provide details about the scam, such as its nature and the involved parties, and enhance their reports by uploading supporting evidence like images or videos. 
+                  </p>
+                  <div class="btn-box">
+                    <a href="">
+                      Report
+                    </a>
+                  </div>
                 </div>
-              </div>
+                {% endif %}
             </div>
           </div>
         </div>
+        {% else %}
+        <div class="row">
+          <div class="col-md-12">
+            <div class="box ">
+              Please login to view our services
+            </div>
+          </div>
+        </div>
+        {% endif %}
         
       </div>
     </div>

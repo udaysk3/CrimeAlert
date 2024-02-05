@@ -16,3 +16,7 @@ class YourData(models.Model):
     RashDrivingonPublicway  = models.IntegerField()
     CriminalTrespass = models.IntegerField()
     # Add more fields based on your dataset
+
+# class ScamReporting(models.Model):
+#     user = models.OneToOneField('accounts.User', on_delete=models.SET_NULL)
+#     district = 

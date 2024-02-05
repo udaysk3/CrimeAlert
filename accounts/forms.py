@@ -18,15 +18,32 @@ USER_TYPE_CHOICES = (
 )
 
 class CustomSignupForm(SignupForm):
-    user_type = forms.CharField( 
-        widget=forms.Select(choices=USER_TYPE_CHOICES))
     phone = forms.CharField(
         widget = forms.TextInput)
     class Meta:
         model = User
     def save(self, request):
         user = super(CustomSignupForm, self).save(request)
-        user.user_type = self.cleaned_data['user_type']
         user.phone = self.cleaned_data['phone']
         user.save()
         return user
+
+# forms.py
+from django import forms
+from django.contrib.auth.forms import AuthenticationForm
+from .models import Police
+
+
+
+class PoliceSignupForm(forms.ModelForm):
+    class Meta:
+        model = Police
+        fields = ['station_code', 'station_name', 'password']
+
+
+class PoliceLoginForm(forms.ModelForm):
+    class Meta:
+        model = Police
+        fields = ['station_code', 'password']
+
+

@@ -53,19 +53,6 @@
                             <label for="user_type" class="form-label">User Type: </label>
                             {%render_field form.user_type %}
                         </div>
-                        <div class="mb-3">
-                            <label for="latitude" class="form-label">Latitude</label>
-                            <input type="text" id="latitude" name="latitude" class="form-control" placeholder="Latitude" readonly>
-                        </div>
-                        
-                        <div class="mb-3">
-                            <label for="longitude" class="form-label">Longitude</label>
-                            <input type="text" id="longitude" name="longitude" class="form-control" placeholder="Longitude" readonly>
-                        </div>
-
-                        {% if redirect_field_value %}
-                            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-                        {% endif %}
                         <input type="hidden" id="user_district" name="user_district">
                         <div class="form-footer">
                             <button type="submit" class="btn btn-primary btn-block">Sign up</button>
@@ -76,23 +63,47 @@
         </div>
     </div>
 </div><!-- Add these lines within the <script> tag or in a separate JavaScript file -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            if ("geolocation" in navigator) {
-                navigator.geolocation.getCurrentPosition(
-                    function (position) {
-                        // Update the latitude and longitude input fields
-                        document.getElementById("latitude").value = position.coords.latitude;
-                        document.getElementById("longitude").value = position.coords.longitude;
-                    },
-                    function (error) {
-                        console.error("Error getting user's location:", error.message);
-                    }
-                );
-            } else {
-                console.error("Geolocation is not supported by this browser.");
-            }
-        });
-    </script>
-    
+    <!-- Update this section within the <script> tag or in a separate JavaScript file -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(
+                function (position) {
+                    // Get the user's district using a geocoding service
+                    const { latitude, longitude } = position.coords;
+                    getDistrictFromCoordinates(latitude, longitude);
+                },
+                function (error) {
+                    console.error("Error getting user's location:", error.message);
+                }
+            );
+        } else {
+            console.error("Geolocation is not supported by this browser.");
+        }
+
+        function getDistrictFromCoordinates(latitude, longitude) {
+            // Use a geocoding API (e.g., Google Maps Geocoding API) to get the district
+            // Replace 'YOUR_API_KEY' with your actual API key
+            const apiKey = 'YOUR_API_KEY';
+            const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apiKey}`;
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const userDistrict = extractDistrictFromGeocodeResult(data);
+                    document.getElementById("user_district").value = userDistrict;
+                })
+                .catch(error => {
+                    console.error("Error fetching geocode data:", error);
+                });
+        }
+
+        function extractDistrictFromGeocodeResult(geocodeResult) {
+            // Implement logic to extract the district from the geocode result
+            // You may need to inspect the structure of the result and find the relevant information
+            // Example: return geocodeResult.results[0].address_components.find(component => component.types.includes("administrative_area_level_2")).long_name;
+        }
+    });
+</script>
+
 {% endblock content %}

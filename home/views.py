@@ -91,3 +91,10 @@ def crimestatistics(request):
     return render(request, 'why.html')
 
 
+def check_user_type(request):
+    if request.method=="POST":
+        if request.POST["user_type"]=="user":
+            return redirect("/accounts/login")
+        else:
+            return redirect("user/police/login")
+    return render(request, "account/check_user_type.html")

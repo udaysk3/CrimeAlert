@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% comment %} {% load allauth i18n %} {% endcomment %}
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Check User Type </h3>
+                </div>
+                <div class="card-body">
+                    <p>Please select the User Type</p>
+                    {% url 'check-user-type' as action_url %}
+                    <form method="post" action="{{ action_url }}">
+                        {% csrf_token %}
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="user_type" value="police"  id="user_type1"  >
+                            <label class="form-check-label" for="user_type1"  >
+                              Police
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="user_type" value="user"  id="user_type2"   checked>
+                            <label class="form-check-label" for="user_type2"  >
+                              Citizen
+                            </label>
+                          </div>
+                        <div class="form-footer">
+                            <button type="submit" class="btn btn-primary">Go to Login</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

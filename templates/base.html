@@ -65,10 +65,19 @@
               <li class="nav-item active">
                 <a class="nav-link" href="majorcrimes.html">Major Crimes<span class="sr-only">(current)</span> </a>
               </li>
-              
+              {% if user.is_authenticated %}
               <li class="nav-item">
-                <a class="nav-link" href="#"> <i class="fa fa-user" aria-hidden="true"></i> Login</a>
+                <a class="nav-link" href="/accounts/logout"> <i class="fa fa-user" aria-hidden="true"></i>Logout</a>
               </li>
+              {% elif request.session.user %}
+              <li class="nav-item">
+                <a class="nav-link" href="/user/police/logout"> <i class="fa fa-user" aria-hidden="true"></i>Logout</a>
+              </li>
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="/check-user-type"> <i class="fa fa-user" aria-hidden="true"></i> Login</a>
+              </li>
+              {% endif %}
               <li class="nav-item">
                 <a class="nav-link" href="about.html">About</a>
               </li>
