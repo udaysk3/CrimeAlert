@@ -32,7 +32,6 @@
                 <div class="card-body">
                     <form method="post" action="{% url 'account_login' %}">
                         {% csrf_token %}
-                        
                         <div class="mb-3">
                             <label for="login" class="form-label">Username or Email</label>
                             {% render_field form.login id="login" name="login" type="text" class="form-control" %}

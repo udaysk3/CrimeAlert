@@ -1,0 +1,26 @@
+<!-- police_signup.html -->
+{% extends "base.html" %}
+{% block content %}
+  <div class="container p-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Police Sign Up</h3>
+          </div>
+
+          <div class="card-body">
+            <form method="post" action="{% url 'police_signup' %}">
+              {% csrf_token %}
+              {{ form.as_p }}
+
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block">Sign up</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
