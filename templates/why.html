@@ -55,15 +55,17 @@
           </h2>
           <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
             <div class="accordion-body">
-              <input type="text" id="district" name="district"  placeholder="Enter State name..." onkeyup="showDistrict()"/><br/>
-              <input type="text" hidden value="state"/><br/>
+              <form action="{% url "home:crimestatistics" %}" method="POST">
+                {% csrf_token %}
+              <input type="text" id="state" name="state"  placeholder="Enter State name..." onkeyup="showDistrict()"/><br/>
+              <input type="text" hidden name="type" value="state"/><br/>
               <button type="submit" class="btn btn-primary mt-2 btn-sm">Get Data</button>
           </div>
         </div>
       </div>
       <div id="graphs-container">
         <div class="container">
-          {% if district %}
+          {% if district or state %}
           <div class="display-flex justify-content-center align-items-center mt-3">
            {% for img in images %}
               {{img | safe}}

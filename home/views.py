@@ -16,6 +16,8 @@ matplotlib.use('Agg')
 def plot_bar_district_chart(target_district):
     data = pd.read_csv("static/dataset/IPC_Crimes_2020.csv")
     district_data = data[data["District"] == target_district]
+    if district_data.empty:
+        return "No data available for the specified district."
     district_data = district_data.drop(columns=["District"])
     plt.figure(figsize=(12, 8))
     plt.bar(district_data.columns, district_data.iloc[0])
@@ -35,6 +37,8 @@ def plot_bar_district_chart(target_district):
 def plot_pie_district_chart(target_district):
     data = pd.read_csv("static/dataset/IPC_Crimes_2020.csv")
     district_data = data[data["District"] == target_district]
+    if district_data.empty:
+        return "No data available for the specified district."
     district_data = district_data.drop(columns=["District"])
     crime_types = district_data.columns
     crime_counts = district_data.iloc[0]
@@ -52,6 +56,8 @@ def plot_pie_district_chart(target_district):
 def plot_bar_districts_chart(districts):
         data = pd.read_csv("static/dataset/IPC_Crimes_2020.csv")
         filtered_data = data[data["District"].isin(districts)]
+        if filtered_data.empty:
+            return "No data available for the specified district."
         grouped_data = filtered_data.groupby("District").sum()
         crime_types = grouped_data.columns
         crime_counts_district_a = grouped_data.loc[districts[0]]
@@ -71,8 +77,29 @@ def plot_bar_districts_chart(districts):
         plt.savefig(image_stream, format='png')
         plt.close()
         image_base64 = base64.b64encode(image_stream.getvalue()).decode('utf-8')
-        img_tag = f'<img width="500px" src="data:image/png;base64,{image_base64}" />'
+        img_tag = f'<img width="750px" src="data:image/png;base64,{image_base64}" />'
         return img_tag
+
+def plot_bar_state_chart(target_state):
+    data = pd.read_csv("static/dataset/IPC_Crimes_2020states.csv")
+    state_data = data[data["State"] == target_state]
+    if state_data.empty:
+        return "No data available for the specified district."
+    state_data = state_data.drop(columns=["State"])
+    plt.figure(figsize=(14, 8))
+    plt.bar(state_data.columns, state_data.iloc[0])
+    plt.xlabel("Crime Type")
+    plt.ylabel("Count")
+    plt.title(f"Crime Type Comparison in {target_state}")
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    image_stream = BytesIO()
+    plt.savefig(image_stream, format='png')
+    plt.close()
+
+    image_base64 = base64.b64encode(image_stream.getvalue()).decode('utf-8')
+    img_tag = f'<img width="750px" src="data:image/png;base64,{image_base64}" />'
+    return img_tag
 def crimestatistics(request):
     if request.method == "POST":
         if request.POST['type'] == 'district':
@@ -88,6 +115,12 @@ def crimestatistics(request):
             images = []
             images.append(plot_bar_districts_chart(districts))
             return render(request, "why.html", {"district": True, "images": images})
+        if request.POST['type'] == 'state':
+            target_state = request.POST["state"]
+            images = []
+            images.append(plot_bar_state_chart(target_state))
+            
+            return render(request, "why.html", {"state": True, "images": images})
     return render(request, 'why.html')
 
 
