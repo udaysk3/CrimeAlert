@@ -10,66 +10,62 @@ import base64
 import numpy as np
 from geopy.geocoders import Nominatim
 import joblib
-
-
 from .forms import ScamReportForm
-
-
-
 from .models import ScamReport
 
 def predict(request):
-    if request.method=="POST":
+    if request.method == "POST":
         address = request.POST['location']
         geolocator = Nominatim(user_agent='crime')
-        location = geolocator.geocode(address,timeout=None)
+        location = geolocator.geocode(address, timeout=None)
         print(location.address)
-        lat=[location.latitude]
-        log=[location.longitude]
-        latlong=pd.DataFrame({'latitude':lat,'longitude':log})
+        lat = [location.latitude]
+        log = [location.longitude]
+        latlong = pd.DataFrame({'latitude': lat, 'longitude': log})
         print(latlong)
+        
         rfc = joblib.load('home/model.pkl')
-        DT= request.POST['timestamp']
-        latlong['timestamp']=DT
-        data=latlong
+        DT = request.POST['timestamp']
+        latlong['timestamp'] = DT
+        data = latlong
         cols = data.columns.tolist()
         cols = cols[-1:] + cols[:-1]
         data = data[cols]
 
         data['timestamp'] = pd.to_datetime(data['timestamp'].astype(str), errors='coerce')
-        data['timestamp'] = pd.to_datetime(data['timestamp'], format = '%d/%m/%Y %H:%M:%S')
-        column_1 = data.loc[:,data.columns[0]]
-        DT=pd.DataFrame({
-              "month": column_1.dt.month,
-              "day": column_1.dt.day,
-              "hour": column_1.dt.hour,
-              "dayofyear": column_1.dt.dayofyear,
-              "week": column_1.dt.week,
-              "weekofyear": column_1.dt.weekofyear,
-             })
-        data=data.drop('timestamp',axis=1)
-        final=pd.concat([DT,data],axis=1)
+        column_1 = data.loc[:, data.columns[0]]
+        DT = pd.DataFrame({
+            "month": column_1.dt.month,
+            "day": column_1.dt.day,
+            "hour": column_1.dt.hour,
+            "dayofyear": column_1.dt.dayofyear,
+            "weekofyear": column_1.dt.isocalendar().week,  # Get week of the year
+        })
+        data = data.drop('timestamp', axis=1)
+        final = pd.concat([DT, data], axis=1)
         print(final)
-        X=final.iloc[:,[0,1,2,3,4,5,6,7]].values
+        X = final.iloc[:, [0, 1, 2, 3, 4, 5, 6, 7]].values
         my_prediction = rfc.predict(X)
         if my_prediction[0][0] == 1:
-            my_prediction='Predicted crime : Act 379-Robbery'
+            my_prediction = 'Predicted crime : Act 379-Robbery'
         elif my_prediction[0][1] == 1:
-            my_prediction='Predicted crime : Act 13-Gambling'
+            my_prediction = 'Predicted crime : Act 13-Gambling'
         elif my_prediction[0][2] == 1:
-            my_prediction='Predicted  : Act 279-Accident'
+            my_prediction = 'Predicted  : Act 279-Accident'
         elif my_prediction[0][3] == 1:
-            my_prediction='Predicted crime : Act 323-Violence'
+            my_prediction = 'Predicted crime : Act 323-Violence'
         elif my_prediction[0][4] == 1:
-            my_prediction='Predicted crime : Act 302-Murder'
+            my_prediction = 'Predicted crime : Act 302-Murder'
         elif my_prediction[0][5] == 1:
-            my_prediction='Predicted crime : Act 363-kidnapping'
+            my_prediction = 'Predicted crime : Act 363-kidnapping'
         else:
-            my_prediction='Place is safe no crime expected at that timestamp.'
+            my_prediction = 'Place is safe no crime expected at that timestamp.'
         print(my_prediction)
         context = my_prediction
-        return render(request,'predict.html', {'prediction' : context})
-    return render(request,'predict.html')
+        return render(request, 'predict.html', {'prediction': context})
+    
+    return render(request, 'predict.html')
+
 
 def display_scam_reports(request):
     if request.method == 'POST':
