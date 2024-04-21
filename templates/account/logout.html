@@ -1,23 +1,23 @@
 {% extends "base.html" %}
 {% comment %} {% load allauth i18n %} {% endcomment %}
 {% block content %}
-<div class="container">
+<div class="container" style="margin-top: 100px;">
     <div class="row justify-content-center">
         <div class="col-lg-6">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Sign Out </h3>
+            <div class="card" style="border: 1px solid #ccc; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+                <div class="card-header" style="color: #ffffff; background-color: #0f054c; border-bottom: 1px solid #ccc; padding: 10px;">
+                    <h3 class="card-title" style="margin: 0;">Sign Out</h3>
                 </div>
-                <div class="card-body">
-                    <p>Are you sure you want to sign out?</p>
+                <div class="card-body" style="padding: 20px;">
+                    <p style="margin-bottom: 20px;">Are you sure you want to sign out?</p>
                     {% url 'account_logout' as action_url %}
                     <form method="post" action="{{ action_url }}">
                         {% csrf_token %}
                         {% if redirect_field_value %}
                             <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
                         {% endif %}
-                        <div class="form-footer">
-                            <button type="submit" class="btn btn-primary">Sign Out</button>
+                        <div class="form-footer" style="margin-top: 20px; width: 20%; "">
+                            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 10px; color: #ffffff; background-color: #0f054c; border: none; border-radius: 5px; cursor: pointer;">Sign Out</button>
                         </div>
                     </form>
                 </div>
@@ -26,3 +26,5 @@
     </div>
 </div>
 {% endblock content %}
+
+

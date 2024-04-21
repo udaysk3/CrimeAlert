@@ -8,7 +8,18 @@
         <img src='{% static 'images/hero-bg.png' %}'  alt="">
       </div>
     </div>
-
+    <script>
+      // Initialize the carousel
+      $(document).ready(function(){
+        $('#customCarousel1').carousel();
+        
+        // Set an interval to advance the carousel slides every 10 seconds
+        setInterval(function(){
+          var nextSlideIndex = ($('#customCarousel1 .carousel-item.active').index() + 1) % $('#customCarousel1 .carousel-item').length;
+          $('#customCarousel1').carousel(nextSlideIndex);
+        }, 10000); // Slide every 10 seconds (10000 milliseconds)
+      });
+    </script>
     <section class="slider_section ">
       <div id="customCarousel1" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
@@ -24,11 +35,7 @@
                     <p>
                      Prediction of crime type based on inputs like data , time, location.By analyzing patterns in when and where different crimes happen, we aim to provide insights that could be useful for law enforcement or public safety efforts.
                     </p>
-                    <div class="btn-box">
-                      <a href="" class="btn1">
-                        Read More
-                      </a>
-                    </div>
+                    
                   </div>
                 </div>
                 <div class="col-md-6">
@@ -51,11 +58,7 @@
                     <p>
                       Crime statistics quantify criminal activities in a specific area, providing metrics on crime types and frequency. Collected by law enforcement, these numbers inform strategies, resource allocation, and evidence-based decision-making for enhancing public safety and addressing community challenges.
                     </p>
-                    <div class="btn-box">
-                      <a href="/crimestatistics" class="btn1">
-                        Read More
-                      </a>
-                    </div>
+                    
                   </div>
                 </div>
                 <div class="col-md-6">
@@ -78,11 +81,7 @@
                     <p>
                       Scam reporting is a feature that empowers users to report instances of fraud or deceptive activities within our app. Users can provide details about the scam, such as its nature and the involved parties, and enhance their reports by uploading supporting evidence like images or videos. 
                     </p>
-                    <div class="btn-box">
-                      <a href="" class="btn1">
-                        Read More
-                      </a>
-                    </div>
+                    
                   </div>
                 </div>
                 <div class="col-md-6">
@@ -108,126 +107,232 @@
 
   <!-- service section -->
 
-  <section class="service_section layout_padding" id="services">
-    <div class="service_container">
-      <div class="container ">
-        <div class="heading_container heading_center">
-          <h2>
-            Our <span>Services</span>
-          </h2>
-          <p>
-            Our services offer scam reporting, crime prediction, and statistics, providing users with tools for reporting fraud, anticipating potential crimes, and accessing insights for informed decision-making and community safety.
-          </p>
-        </div>
-        <div class="row">
-          <div class="col-md-4 ">
-            <div class="box ">
-              <div class="img-box">
-                <img src="{% static "images/s1.png" %}" alt="">
-              </div>
-              <div class="detail-box">
-                <h5>
-                  Crime Prediction
-                </h5>
-                <p>
-                  Crime prediction in our app allows users to input date, time, and location, predicting  potential crime type at that place and time. This feature utilizes historical data  to offer insights, assisting users like police in making some informed decisions regarding safety and contributing to  crime prevention measures.
-                </p>
-                <div class="btn-box">
-                  <a href="">
-                    Predict
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 ">
-            <div class="box ">
-              <div class="img-box">
-                <img src="{% static "images/s2.png" %}" alt="">
-              </div>
-              <div class="detail-box">
-                <h5>
-                  Crime Statistics
-                </h5>
-                <p>
-                  Crime statistics quantify criminal activities in a specific area, providing metrics on crime types and frequency. Collected by law enforcement, these numbers inform strategies, resource allocation, and evidence-based decision-making for enhancing public safety and addressing community challenges.
-                </p>
-                <div class="btn-box">
-                  <a href="/crimestatistics" >
-                    Analyze
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 ">
-            <div class="box ">
-              <div class="img-box">
-                <img src="{% static "images/s3.png" %}" alt="">
-              </div>
-              <div class="detail-box">
-                <h5>
-                  Scam Reporting 
-                </h5>
-                <p>
-                  Scam reporting is a feature that empowers users to report instances of fraud or deceptive activities within our app. Users can provide details about the scam, such as its nature and the involved parties, and enhance their reports by uploading supporting evidence like images or videos. 
-                </p>
-                <div class="btn-box">
-                  <a href="">
-                    Report
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-      </div>
-    </div>
-  </section>
+  
 
   <!-- end service section -->
 
+  <section class="service_section layout_padding" id="services">
+    <div class="service_container">
+        <div class="container ">
+            <div class="heading_container heading_center">
+                <h2>
+                    Our <span>Services</span>
+                </h2>
+                <p>
+                    Our services offer scam reporting, crime prediction, and statistics, providing users with tools for reporting fraud, anticipating potential crimes, and accessing insights for informed decision-making and community safety.
+                </p>
+            </div>
+            {% if request.session.user or user.is_authenticated %}
+            <div class="row justify-content-center">
+                {% if request.session.user %}
+                <div class="col-md-4">
+                    <div class="box">
+                        <div class="img-box">
+                            <img src="{% static "images/s1.png" %}" alt="">
+                        </div>
+                        <div class="detail-box">
+                            <h5>
+                                Crime Prediction
+                            </h5>
+                            <p>
+                                Crime prediction in our app allows users to input date, time, and location, predicting potential crime type at that place and time. This feature utilizes historical data to offer insights, assisting users like police in making informed decisions regarding safety and contributing to crime prevention measures.
+                            </p>
+                            <div class="btn-box">
+                                <a href="/predict">
+                                    Predict
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                <div class="col-md-4">
+                    <div class="box">
+                        {% if request.session.user or user.is_authenticated %}
+                        <div class="img-box">
+                            <img src="{% static "images/s2.png" %}" alt="">
+                        </div>
+                        <div class="detail-box">
+                            <h5>
+                                Crime Statistics
+                            </h5>
+                            <p>
+                                Crime statistics quantify criminal activities in a specific area, providing metrics on crime types and frequency. Collected by law enforcement, these numbers inform strategies, resource allocation, and evidence-based decision-making for enhancing public safety and addressing community challenges.
+                            </p>
+                            <div class="btn-box">
+                                <a href="/crimestatistics">
+                                    Analyze
+                                </a>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% if user.is_authenticated %}
+                <div class="col-md-4">
+                    <div class="box">
+                        
+                        <div class="img-box">
+                            <img src="{% static "images/s3.png" %}" alt="">
+                        </div>
+                        <div class="detail-box">
+                            <h5>
+                                Scam Reporting
+                            </h5>
+                            <p>
+                                Scam reporting is a feature that empowers users to report instances of fraud or deceptive activities within our app. Users can provide details about the scam, such as its nature and the involved parties, and enhance their reports by uploading supporting evidence like images or videos.
+                            </p>
+                            <div class="btn-box">
+                                <a href="/scam_report">
+                                    Report
+                                </a>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box">
+                        Please login to view our services<br>
+                        <div class="btn-box">
+                            <a href="/check-user-type" class="btn1">
+                                Login
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
 
+        </div>
+    </div>
+</section>
   <!-- about section -->
+  <section class="service_section layout_padding" id="services">
+    <div class="service_container">
+        <div class="container ">
+            <div class="heading_container heading_center">
+                <h2>
+                    Scam <span>Reports</span>
+                </h2>
+            </div>
+            {% if request.session.user or user.is_authenticated %}
+            <div class="col-lg-16">
+              <div class="card" style="border: 1px solid #ccc; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+                  <div class="card-header" style="color: #ffffff; background-color: #0f054c; border-bottom: 1px solid #ccc; padding: 10px;">
+                    {% if request.session.user %}
+                     <h3 class="card-title" style="margin: 0;">Scam Reports in {{ request.session.district }} </h3>
+                     {% else %}
+                      <h3 class="card-title" style="margin: 0;">Scam Reports in {{ user.district }} </h3>
+                      {% endif %}
+                  </div>
+                  <div class="card-body">
+                    {% if request.session.user %}
+                    {% if request.session.scams %}
+                    <div class="row">
+                        {% for scam_report in request.session.scams %}
+                            <div class="col-md-3">
+                                <div class="scam-report" style="margin-bottom: 10px;"> <!-- Reduced margin-bottom value -->
+                                    <div class="news_img">
+                                        <img width="250px" class="review-img" src="scam_images/{{ scam_report.image }}" alt="Scam Image">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="scam-details" style="margin-bottom: 10px;"> <!-- Reduced margin-bottom value -->
+                                    <p><strong>Report by {{ scam_report.user }}</strong></p>
+                                    <p><strong>Description:</strong> {{ scam_report.scam_description }}</p>
+                                    
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                   
 
-  <section class="about_section layout_padding">
+                {% else %}
+                    <p>No scam reports found for this district.</p>
+                {% endif %}
+                     {% else %}
+                     {% if  request.user %}
+                     <div class="row">
+                         {% for scam_report in request.session.scams %}
+                             <div class="col-md-3">
+                                 <div class="scam-report" style="margin-bottom: 10px;"> <!-- Reduced margin-bottom value -->
+                                     <div class="news_img">
+                                         <img width="250px" class="review-img" src="scam_images/{{ scam_report.image }}" alt="Scam Image">
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="col-md-9">
+                                 <div class="scam-details" style="margin-bottom: 10px;"> <!-- Reduced margin-bottom value -->
+                                     <p><strong>Report by {{ scam_report.user }}</strong></p>
+                                     <p><strong>Description:</strong> {{ scam_report.scam_description }}</p>
+                                     
+                                 </div>
+                             </div>
+                         {% endfor %}
+                     </div>
+                    
+
+                 {% else %}
+                     <p>No scam reports found for this district.</p>
+                 {% endif %}
+                {% endif %}
+                      
+                  </div>
+              </div>
+          </div>
+            {% else %}
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box">
+                        Please login to view Scam Reports<br>
+                        <div class="btn-box">
+                            <a href="/check-user-type" class="btn1">
+                                Login
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+</section>
+
+  <section class="about_section layout_padding" id="about">
     <div class="container  ">
       <div class="heading_container heading_center">
         <h2>
           About <span>Us</span>
         </h2>
         <p>
-          Magni quod blanditiis non minus sed aut voluptatum illum quisquam aspernatur ullam vel beatae rerum ipsum voluptatibus
+          Crimescape is a revolutionary platform designed to empower communities through advanced crime analysis and reporting tools. Our app serves as a pivotal resource for both law enforcement professionals and citizens alike, fostering collaboration and proactive measures to enhance public safety.
         </p>
       </div>
-      <div class="row">
-        <div class="col-md-6 ">
-          <div class="img-box">
-            <img src="{% static "images/about-img.png" %}" alt="">
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="detail-box">
-            <h3>
-              We Are Finexo
-            </h3>
-            <p>
-              There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration
-              in some form, by injected humour, or randomised words which don't look even slightly believable. If you
-              are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in
-              the middle of text. All
-            </p>
-            <p>
-              Molestiae odio earum non qui cumque provident voluptates, repellendus exercitationem, possimus at iste corrupti officiis unde alias eius ducimus reiciendis soluta eveniet. Nobis ullam ab omnis quasi expedita.
-            </p>
-            <a href="">
-              Read More
-            </a>
-          </div>
-        </div>
+      <div class="heading_container heading_center">
+        <h2>
+          Our <span>Mission</span>
+        </h2>
+        <p>
+          At Crimescape, our mission is to harness the power of data and technology to combat crime effectively. We strive to provide innovative solutions that enable users to predict potential criminal activity, report scams, and analyze crime statistics comprehensively
+        </p>
       </div>
-    </div>
+      <div class="heading_container heading_center">
+        <h2>
+          Our <span>commitment</span>
+        </h2>
+        <p>
+          At Crimescape, we are committed to promoting transparency, collaboration, and accountability in crime prevention efforts. By providing accessible tools and resources, we aim to empower individuals and law enforcement agencies to work together towards creating safer and more secure communities.
+
+Join us in our mission to make our neighborhoods safer and more resilient. Together, we can build a better future, free from the threat of crime.
+        </p>
+      </div>
+      
   </section>
 
   <!-- end about section -->
@@ -238,35 +343,22 @@
     <div class="container">
       <div class="heading_container heading_center">
         <h2>
-          Why Choose <span>Us</span>
+          Why  <span>Us</span>
         </h2>
       </div>
       <div class="why_container">
-        <div class="box">
-          <div class="img-box">
-            <img src="{% static "images/w1.png" %}" alt="">
-          </div>
-          <div class="detail-box">
-            <h5>
-              Expert Management
-            </h5>
-            <p>
-              Incidunt odit rerum tenetur alias architecto asperiores omnis cumque doloribus aperiam numquam! Eligendi corrupti, molestias laborum dolores quod nisi vitae voluptate ipsa? In tempore voluptate ducimus officia id, aspernatur nihil.
-              Tempore laborum nesciunt ut veniam, nemo officia ullam repudiandae repellat veritatis unde reiciendis possimus animi autem natus
-            </p>
-          </div>
-        </div>
+        
         <div class="box">
           <div class="img-box">
             <img src="{% static "images/w2.png" %}" alt="">
           </div>
           <div class="detail-box">
             <h5>
-              Secure Investment
+              Advanced Technology
             </h5>
             <p>
-              Incidunt odit rerum tenetur alias architecto asperiores omnis cumque doloribus aperiam numquam! Eligendi corrupti, molestias laborum dolores quod nisi vitae voluptate ipsa? In tempore voluptate ducimus officia id, aspernatur nihil.
-              Tempore laborum nesciunt ut veniam, nemo officia ullam repudiandae repellat veritatis unde reiciendis possimus animi autem natus
+
+Crimescape leverages state-of-the-art technology and advanced algorithms to deliver accurate crime predictions, comprehensive statistics, and seamless scam reporting functionalities. Our platform harnesses the power of data analytics to provide actionable insights for crime prevention and community safety.
             </p>
           </div>
         </div>
@@ -276,11 +368,23 @@
           </div>
           <div class="detail-box">
             <h5>
-              Instant Trading
+              User-Friendly Interface
             </h5>
             <p>
-              Incidunt odit rerum tenetur alias architecto asperiores omnis cumque doloribus aperiam numquam! Eligendi corrupti, molestias laborum dolores quod nisi vitae voluptate ipsa? In tempore voluptate ducimus officia id, aspernatur nihil.
-              Tempore laborum nesciunt ut veniam, nemo officia ullam repudiandae repellat veritatis unde reiciendis possimus animi autem natus
+
+We prioritize user experience, offering an intuitive and user-friendly interface that simplifies navigation and enhances accessibility for all users. Whether you're a seasoned law enforcement professional or a concerned citizen, our platform ensures a seamless and hassle-free experience, making it easy to access vital crime-related information and resources.
+          </div>
+        </div>
+        <div class="box">
+          <div class="img-box">
+            <img src="{% static "images/w1.png" %}" alt="">
+          </div>
+          <div class="detail-box">
+            <h5>
+              Community Collaboration
+            </h5>
+            <p>
+              At Crimescape, we believe in the strength of community collaboration. Our platform facilitates seamless communication and cooperation between law enforcement agencies, citizens, and local communities. By fostering a sense of unity and collective responsibility, we empower individuals to actively contribute to crime prevention efforts.
             </p>
           </div>
         </div>
@@ -288,372 +392,30 @@
           <div class="img-box">
             <img src="{% static "images/w4.png" %}" alt="">
           </div>
+          
           <div class="detail-box">
             <h5>
-              Happy Customers
+              Dedicated Support
             </h5>
             <p>
-              Incidunt odit rerum tenetur alias architecto asperiores omnis cumque doloribus aperiam numquam! Eligendi corrupti, molestias laborum dolores quod nisi vitae voluptate ipsa? In tempore voluptate ducimus officia id, aspernatur nihil.
-              Tempore laborum nesciunt ut veniam, nemo officia ullam repudiandae repellat veritatis unde reiciendis possimus animi autem natus
+              At Crimescape, customer satisfaction is our top priority. Our dedicated support team is available to assist users with any queries, concerns, or technical issues they may encounter. Whether you need assistance with navigating the platform, reporting a scam, or interpreting crime statistics, our team is here to provide prompt and personalized support every step of the way.
             </p>
           </div>
         </div>
       </div>
-      <div class="btn-box">
-        <a href="">
-          Read More
-        </a>
-      </div>
+      
     </div>
   </section>
 
   <!-- end why section -->
 
   <!-- team section -->
-  <section class="team_section layout_padding">
-    <div class="container-fluid">
-      <div class="heading_container heading_center">
-        <h2 class="">
-          Our <span> Team</span>
-        </h2>
-      </div>
-
-      <div class="team_container">
-        <div class="row">
-          <div class="col-lg-3 col-sm-6">
-            <div class="box ">
-              <div class="img-box">
-                <img src="{% static "images/team-1.jpg" %}" class="img1" alt="">
-              </div>
-              <div class="detail-box">
-                <h5>
-                  Joseph Brown
-                </h5>
-                <p>
-                  Marketing Head
-                </p>
-              </div>
-              <div class="social_box">
-                <a href="#">
-                  <i class="fa fa-facebook" aria-hidden="true"></i>
-                </a>
-                <a href="#">
-                  <i class="fa fa-twitter" aria-hidden="true"></i>
-                </a>
-                <a href="#">
-                  <i class="fa fa-linkedin" aria-hidden="true"></i>
-                </a>
-                <a href="#">
-                  <i class="fa fa-instagram" aria-hidden="true"></i>
-                </a>
-                <a href="#">
-                  <i class="fa fa-youtube-play" aria-hidden="true"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-sm-6">
-            <div class="box ">
-              <div class="img-box">
-                <img src="{% static "images/team-2.jpg" %}" class="img1" alt="">
-              </div>
-              <div class="detail-box">
-                <h5>
-                  Nancy White
-                </h5>
-                <p>
-                  Marketing Head
-                </p>
-              </div>
-              <div class="social_box">
-                <a href="#">
-                  <i class="fa fa-facebook" aria-hidden="true"></i>
-                </a>
-                <a href="#">
-                  <i class="fa fa-twitter" aria-hidden="true"></i>
-                </a>
-                <a href="#">
-                  <i class="fa fa-linkedin" aria-hidden="true"></i>
-                </a>
-                <a href="#">
-                  <i class="fa fa-instagram" aria-hidden="true"></i>
-                </a>
-                <a href="#">
-                  <i class="fa fa-youtube-play" aria-hidden="true"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-sm-6">
-            <div class="box ">
-              <div class="img-box">
-                <img src="{% static "images/team-3.jpg" %}" class="img1" alt="">
-              </div>
-              <div class="detail-box">
-                <h5>
-                  Earl Martinez
-                </h5>
-                <p>
-                  Marketing Head
-                </p>
-              </div>
-              <div class="social_box">
-                <a href="#">
-                  <i class="fa fa-facebook" aria-hidden="true"></i>
-                </a>
-                <a href="#">
-                  <i class="fa fa-twitter" aria-hidden="true"></i>
-                </a>
-                <a href="#">
-                  <i class="fa fa-linkedin" aria-hidden="true"></i>
-                </a>
-                <a href="#">
-                  <i class="fa fa-instagram" aria-hidden="true"></i>
-                </a>
-                <a href="#">
-                  <i class="fa fa-youtube-play" aria-hidden="true"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-sm-6">
-            <div class="box ">
-              <div class="img-box">
-                <img src="{% static "images/team-4.jpg" %}" class="img1" alt="">
-              </div>
-              <div class="detail-box">
-                <h5>
-                  Josephine Allard
-                </h5>
-                <p>
-                  Marketing Head
-                </p>
-              </div>
-              <div class="social_box">
-                <a href="#">
-                  <i class="fa fa-facebook" aria-hidden="true"></i>
-                </a>
-                <a href="#">
-                  <i class="fa fa-twitter" aria-hidden="true"></i>
-                </a>
-                <a href="#">
-                  <i class="fa fa-linkedin" aria-hidden="true"></i>
-                </a>
-                <a href="#">
-                  <i class="fa fa-instagram" aria-hidden="true"></i>
-                </a>
-                <a href="#">
-                  <i class="fa fa-youtube-play" aria-hidden="true"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- end team section -->
-
-
-  <!-- client section -->
-
-  <section class="client_section layout_padding">
-    <div class="container">
-      <div class="heading_container heading_center psudo_white_primary mb_45">
-        <h2>
-          What says our <span>Customers</span>
-        </h2>
-      </div>
-      <div class="carousel-wrap ">
-        <div class="owl-carousel client_owl-carousel">
-          <div class="item">
-            <div class="box">
-              <div class="img-box">
-                <img src="{% static "images/client1.jpg" %}" alt="" class="box-img">
-              </div>
-              <div class="detail-box">
-                <div class="client_id">
-                  <div class="client_info">
-                    <h6>
-                      LusDen
-                    </h6>
-                    <p>
-                      magna aliqua. Ut
-                    </p>
-                  </div>
-                  <i class="fa fa-quote-left" aria-hidden="true"></i>
-                </div>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis </p>
-              </div>
-            </div>
-          </div>
-          <div class="item">
-            <div class="box">
-              <div class="img-box">
-                <img src="{% static "images/client2.jpg" %}" alt="" class="box-img">
-              </div>
-              <div class="detail-box">
-                <div class="client_id">
-                  <div class="client_info">
-                    <h6>
-                      Zen Court
-                    </h6>
-                    <p>
-                      magna aliqua. Ut
-                    </p>
-                  </div>
-                  <i class="fa fa-quote-left" aria-hidden="true"></i>
-                </div>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis </p>
-              </div>
-            </div>
-          </div>
-          <div class="item">
-            <div class="box">
-              <div class="img-box">
-                <img src="{% static "images/client1.jpg" %}" alt="" class="box-img">
-              </div>
-              <div class="detail-box">
-                <div class="client_id">
-                  <div class="client_info">
-                    <h6>
-                      LusDen
-                    </h6>
-                    <p>
-                      magna aliqua. Ut
-                    </p>
-                  </div>
-                  <i class="fa fa-quote-left" aria-hidden="true"></i>
-                </div>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis </p>
-              </div>
-            </div>
-          </div>
-          <div class="item">
-            <div class="box">
-              <div class="img-box">
-                <img src="{% static "images/client2.jpg" %}" alt="" class="box-img">
-              </div>
-              <div class="detail-box">
-                <div class="client_id">
-                  <div class="client_info">
-                    <h6>
-                      Zen Court
-                    </h6>
-                    <p>
-                      magna aliqua. Ut
-                    </p>
-                  </div>
-                  <i class="fa fa-quote-left" aria-hidden="true"></i>
-                </div>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  
 
   <!-- end client section -->
 
 
   <!-- info section -->
 
-  <section class="info_section layout_padding2">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 col-lg-3 info_col">
-          <div class="info_contact">
-            <h4>
-              Address
-            </h4>
-            <div class="contact_link_box">
-              <a href="">
-                <i class="fa fa-map-marker" aria-hidden="true"></i>
-                <span>
-                  Location
-                </span>
-              </a>
-              <a href="">
-                <i class="fa fa-phone" aria-hidden="true"></i>
-                <span>
-                  Call +01 1234567890
-                </span>
-              </a>
-              <a href="">
-                <i class="fa fa-envelope" aria-hidden="true"></i>
-                <span>
-                  demo@gmail.com
-                </span>
-              </a>
-            </div>
-          </div>
-          <div class="info_social">
-            <a href="">
-              <i class="fa fa-facebook" aria-hidden="true"></i>
-            </a>
-            <a href="">
-              <i class="fa fa-twitter" aria-hidden="true"></i>
-            </a>
-            <a href="">
-              <i class="fa fa-linkedin" aria-hidden="true"></i>
-            </a>
-            <a href="">
-              <i class="fa fa-instagram" aria-hidden="true"></i>
-            </a>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3 info_col">
-          <div class="info_detail">
-            <h4>
-              Info
-            </h4>
-            <p>
-              necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful
-            </p>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-2 mx-auto info_col">
-          <div class="info_link_box">
-            <h4>
-              Links
-            </h4>
-            <div class="info_links">
-              <a class="active" href="index.html">
-                Home
-              </a>
-              <a class="" href="about.html">
-                About
-              </a>
-              <a class="" href="service.html">
-                Services
-              </a>
-              <a class="" href="why.html">
-                Why Us
-              </a>
-              <a class="" href="team.html">
-                Team
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3 info_col ">
-          <h4>
-            Subscribe
-          </h4>
-          <form action="#">
-            <input type="text" placeholder="Enter email" />
-            <button type="submit">
-              Subscribe
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
+ 
   {% endblock content %}

@@ -3,7 +3,6 @@ from django.contrib.auth.models import AbstractBaseUser,AbstractUser,Permissions
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    
     email = models.EmailField(max_length=254, unique=True)
     username = models.CharField(max_length=254, unique=True)
     phone = models.CharField(max_length=254,null=False)
@@ -12,19 +11,22 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     last_login = models.DateTimeField(null=True, blank=True)
     date_joined = models.DateTimeField(auto_now_add=True)
-    
-    USER_TYPE_CHOICES = (
-     ('Citizen', 'Citizen'),
-    ('Police', 'Police'),
-   
-        )
-    user_type = models.CharField(max_length=10,
-                                      choices=USER_TYPE_CHOICES,
-                                      default='Citizen')
-
     USERNAME_FIELD = 'username'
     EMAIL_FIELD = 'email'
+    district = models.CharField(max_length=255)
     REQUIRED_FIELDS = []
+    objects = UserManager()
+
+    def get_absolute_url(self):
+        return "/users/%i/" % (self.pk)
+    
+
+class Police(AbstractBaseUser):
+    station_code = models.CharField(max_length=254)
+    station_name = models.CharField(max_length=254)
+    district = models.CharField(max_length=255)
+    USERNAME_FIELD = 'station_code'
+    REQUIRED_FIELDS = ['station_code', 'password']
 
     objects = UserManager()
 

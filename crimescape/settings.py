@@ -144,8 +144,12 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "optional"
 ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
 ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 86400  # 1 day in seconds
-ACCOUNT_LOGOUT_REDIRECT_URL = "/accounts/login/"
+ACCOUNT_LOGOUT_REDIRECT_URL = "/"
 LOGIN_REDIRECT_URL = "/"  # default to /accounts/profile
 
 ACCOUNT_FORMS = {'signup': 'accounts.forms.CustomSignupForm'}
 AUTH_USER_MODEL = 'accounts.User'
+
+MEDIA_URL = '/scam_images/'
+# Path where media is stored
+MEDIA_ROOT = os.path.join(BASE_DIR, 'scam_images/')

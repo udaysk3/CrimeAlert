@@ -3,187 +3,280 @@
 {% load static %}
 {% block content %}
 
+<script type="text/javascript">
+  var states_arr = new Array("Andhra Pradesh" , "Arunachal Pradesh" , "Assam" , "Bihar" , "Chhattisgarh" , "Goa" , "Gujarat" , "Haryana" , "Himachal Pradesh" , "Jammu and Kashmir" , "Jharkhand" , "Karnataka" , "Kerala" , "Madhya Pradesh" , "Maharashtra" , "Manipur" , "Meghalaya" , "Mizoram" , "Nagaland" , "Orissa" , "Punjab" , "Rajasthan" , "Sikkim" , "Tamil Nadu" , "Telangana" , "Tripura" , "Uttar Pradesh" , "Uttaranchal" , "West Bengal" , "Andaman and Nicobar Islands" , "Chandigarh" , "D&N Haveli, Daman and Diu" , "Delhi" , "Lakshadweep" , "Pondicherry");
 
-  <section class="why_section layout_padding">
-    <div class="container">
+  var district_arr = new Array();
+
+  district_arr[0] = "";
+
+  district_arr[1] = "Anantapur|Chittoor|Cuddapah|East Godavari|Guntakal Railway|Guntur|Guntur Urban|Krishna|Kurnool|Nellore|Prakasham|Rajahmundry|Srikakulam|Tirupathi Urban|Vijayawada City|Vijayawada Railway|Visakha Rural|Visakhapatnam|Vizianagaram|West Godavari"
+
+  district_arr[2] = "Anjaw|Changlang|Crime Branch|Dibang Valley|Kameng East|Kameng West|Kurung Kumey|Lohit|Longding|Lower Dibang Valley|Papum Pare City|Papum Pare Rural|Siang East|Siang Upper|Siang West|Subansiri Lower|Subansiri Upper|Tawang|Tirap|Namsai|Siang|Kamle|Kra Dadi|Lower Siang|Leparada|Shiyomi|Pakkessang";
+
+  district_arr[3] = "BIEO|Barpeta|Baksa|Bongaigaon|CID|Cachar|Chirang|Darrang|Dhemaji|Dhubri|Dibrugarh|GRP|Goalpara|Golaghat|Guwahati City|Hailakandi|Hamren|Jorhat|Kamrup|Karbi Anglong|Karimganj|Kokrajhar|Lakhimpur|Morigaon|Dima Hasao|Nagaon|Nalbari|RPO|SOU|STF|Sibsagar|Sonitpur|Tinsukia|Udalguri|Sadia|Majuli|Biswanath|Hojai|South Salmara|Charaideo";
+
+  district_arr[4] = "Araria|Arwal|Aurangabad|Bagaha|Banka|Begusarai|Bettiah|Kaimur(Bhabhua)|Bhagalpur|Bhojpur|Buxar|Darbhanga|Gaya|Gopalganj|Jamalpur Railway|Jamui|Jehanabad|Katihar|Katihar Railway|Khagaria|Kishanganj|Lakhisarai|Madhepura|Madhubani|Motihari|Munger|Muzaffarpur|Muzaffarpur Railway|Nalanda|Naugachia|Nawadah|Patna|Patna Railway|Purnea|Rohtas|Saharsa|Samastipur|Saran|Sheikhpura|Sheohar|Sitamarhi|Siwan|Supaul|Vaishali|Economic Offences Unit|Anti Terrorist Squad";
+
+  district_arr[5] = "Balod|Balodbazar|Balrampur|Bemetra|Bilaspur|Bizapur|Dantewara|Dhamtari|Durg|Gariyaband|GRP Raipur|Jagdalpur|Janjgir|Jashpur|Kabirdham|Kanker|Kondagaon|Korba|Koriya|Mahasamund|Mungali|Narayanpur|Raigarh|Raipur|Rajnandgaon|Sarguja|Sukma|Surajpur|Gaurela-Pendra-Marwari";
+
+  district_arr[6] = "North Goa|South Goa|CID";
+
+  district_arr[7] = "Ahmedabad City|Ahmedabad Rural|Amreli|Anand|Arvalli|Banaskantha|Bharuch|Bhavnagar|Botad|Chhotaudepur|CID Crime|Dahod|Dang|Devbhumi Dwarka|Gandhinagar|Gir Somnath|Jamnagar|Junagadh|Kachchh East(G)|Kachchh West(B)|Kheda|Mahisagar|Mehsana|Morbi|Narmada|Navsari|Panchmahal|Patan|Porbandar|Rajkot City|Rajkot Rural|Sabarkantha|Surat City|Surat Rural|Surendranagar|Tapi|Vadodara City|Vadodara Rural|Valsad|W.Rly Ahmedabad|W.Rly Vadodara|Cyber Ahmedabad Range|Cyber Bhavnagar Range|Cyber Border Range|Cyber Gandhinagar Range|Cyber Junagadh Range|Cyber Panchmahal Range|Cyber Rajkot Range|Cyber Surat Range|Cyber Vadodara Range";
+
+  district_arr[8] = "Ambala|Bhiwani|Faridabad|Fatehabad|GRP|Gurugram|Hissar|Jhajjar|Jind|Kaithal|Karnal|Kurukshetra|Mahendergarh|Nuh|Palwal|Panchkula|Panipat|Rewari|Rohtak|Sirsa|Sonipat|Yamunanagar|Irrigation & Power|Charkhi Dadri|Hansi";
+
+  district_arr[9] = "Baddi|Bilaspur|Chamba|CID|GRP|Hamirpur|Kangra|Kinnaur|Kullu|Lahaul & Spiti|Mandi|Shimla|Sirmaur|Solan|Una|Cyber";
+
+  district_arr[10] = "Anantnag|Awantipora|Bandipora|Baramulla|Budgam|Crime Jammu|Crime Srinagar|Doda|Ganderbal|Handwara|Jammu|Kathua|Kishtwar|Kulgam|Kupwara|Poonch|Pulwama|Railways Jammu|Railways Kashmir|Railways Katra|Rajouri|Ramban|Reasi|Samba|Shopian|Sopore|Srinagar|Udhampur|Cyber Crime Jammu|Cyber Crime Kashmir|Anti Narcotic Task Force Jammu";
+
+  district_arr[11] = "Bokaro|Chaibasa|Chatra|Deoghar|Dhanbad|Dhanbad Railway|Dumka|Garhwa|Giridih|Godda|Gumla|Hazaribagh|Jamshedpur|Jamshedpur Railway|Jamtara|Khunti|Koderma|Latehar|Lohardagga|Pakur|Palamu|Ramgarh|Ranchi|Sahebganj|Saraikela|Simdega";
+
+  district_arr[12] = "Bagalkot|Bengaluru City|Bengaluru District|Belagavi District|Ballari|Bidar|Vijayapura|Chikkaballapura|Chamarajnagar|Chikkamagaluru|Chitradurga|Dakshina Kannada|Davanagere|Dharwad|Gadag|Kalaburgi|Hassan|Haveri|Hubballi Dharwad City|K.G.F.|Kodagu|Kolar|Koppal|Mandya|Mangaluru City|Mysuru City|Mysuru District|Raichur|K.Railways|Ramanagara|Shimoga|Tumakuru|Udupi|Uttara Kannada|Yadgiri|Belagavi City|Kalaburgi City";
+
+  district_arr[13] = "Alapuzha|Ernakulam Commr.|Ernakulam Rural|Idukki|Kannur City|Kasargod|Kollam Commr.|Kollam Rural|Kottayam|Kozhikode Commr.|Kozhikode Rural|Malappuram|Palakkad|Pathanamthitta|Railways|Thrissur Commr.|Thrissur Rural|Trivandrum Commr.|Trivandrum Rural|Wayanadu|Crime Branch|Kannur Rural";
+
+  district_arr[14] = "Agar|Alirajpur|Anuppur|Ashok Nagar|Balaghat|Barwani|Betul|Bhind|Bhopal|Bhopal Railway|Burhanpur|Chhatarpur|Chhindwara|Damoh|Datia|Dewas|Dhar|Dindori|Guna|Gwalior|Harda|Hoshangabad|Indore|Indore Railway|Jabalpur|Jabalpur Railway|Jhabua|Katni|Khandwa|Khargone|Mandla|Mandsaur|Morena|Narsinghpur|Neemuch|Panna|Raisen|Rajgarh|Ratlam|Rewa|Sagar|Satna|Seoni|Shahdol|Shajapur|Sheopur|Shivpuri|Sidhi|Sehore|Singrauli|Tikamgarh|Ujjain|Umaria|Vidisha|Cyber Crime Cell|Niwari";
+
+  district_arr[15] = "Ahmednagar|Akola|Amravati Commr.|Amravati Rural|Aurangabad Commr.|Aurangabad Rural|Beed|Bhandara|Buldhana|Chandrapur|Dhule|Gadchiroli|Gondia|Hingoli|Jalgaon|Jalna|Kolhapur|Latur|Mumbai Commr.|Mumbai Railway|Nagpur Commr.|Nagpur Railway|Nagpur Rural|Nanded|Nandurbar|Nasik Commr.|Nasik Rural|Navi Mumbai|Osmanabad|Palghar|Parbhani|Pune Commr.|Pune Railway|Pune Rural|Raigad|Ratnagiri|Sangli|Satara|Sindhudurg|Solapur Commr.|Solapur Rural|Thane Commr.|Thane Rural|Wardha|Washim|Yavatmal|Pimpri Chinchwad City|Aurangabad Railway|Mira Bhayandar Vasai Virar Commr.";
+
+  district_arr[16] = "Bishnupur|Chandel|Churachandpur|CID|Imphal East|Imphal West|Senapati|Tamenglong|Thoubal|Ukhrul|Kakching|Kamjong|Kangpokpi|Jiribam|Noney|Pherzawl|Tengnoupal|Narcotic";
+
+  district_arr[17] = "Garo Hills East|Garo Hills North|Garo Hills South|Garo Hills South West|Garo Hills West|Jaintia Hills West|Jaintia Hills East|Khasi Hills East|Khasi Hills South West|Khasi Hills West|Ri-Bhoi|Cyber Cell";
+
+  district_arr[18] = "Aizawl|Champhai|Kolasib|Lawngtlai|Lunglei|Mamit|Saiha|Serchhip|Spl Narcotic|Saitual|Khawzawl|Hnahthial|Cyber";
+
+  district_arr[19] = "Dimapur|Kiphire|Kohima|Longleng|Mokokchung|Mon|Peren|Phek|Tuensang|Wokha|Zunheboto";
+
+  district_arr[20] = "Angul|Balasore|Baragarh|Berhampur|Bhadrak|Bolangir|Boudh|Cuttack|DCP BBSR|DCP CTC|Deogarh|Dhenkanal|Gajapati|Ganjam|Jagatsinghpur|Jajpur|Jharsuguda|Kalahandi|Kandhamal|Kendrapara|Keonjhar|Khurda|Koraput|Malkangiri|Mayurbhanj|Nayagarh|Nabarangpur|Nuapada|Puri|Rayagada|Rourkela|Sambalpur|Sonepur|SRP(Cuttack)|SRP(Rourkela)|Sundargarh|CID CB";
+
+
+  district_arr[21] = "Amritsar Rural|Barnala|Batala|Bathinda|CP Amritsar|CP Jalandhar|CP Ludhiana|Faridkot|Fatehgarh Sahib|Fazilka|Ferozepur|GRP|Gurdaspur|Hoshiarpur|Jalandhar Rural|Kapurthala|Khanna|Ludhiana Rural|Mansa|Moga|Muktsar|Pathankot|Patiala|Ropar|Sangrur|SAS Nagar|SBS Nagar|Tarn Taran|Bureau of Investigation|Intelligence Wing|NRI Wing|Special Task Force|Malerkotla";
+
+  district_arr[22] = "Ajmer|Alwar|Banswara|Baran|Barmer|Bharatpur|Bhilwara|Bikaner|Bundi|Chittorgarh|Churu|Dausa|Dholpur|Dungarpur|GRP Ajmer|GRP Jodhpur|Ganganagar|Hanumangarh|Jaipur East|Jaipur North|Jaipur Rural|Jaipur South|Jaipur West|Jaisalmer|Jalore|Jhalawar|Jhunjhunu|Jodhpur East|Jodhpur West|Jodhpur Rural|Karauli|Kota City|Kota Rural|Nagaur|Pali|Pratapgarh|Rajsamand|Sawai Madhopur|Sikar|Sirohi|Tonk|Udaipur|Jaipur Metro|SCRB|SOG|SSB|Jaipur Crime|Bhiwadi";
+
+  district_arr[23] = "East|North|South|East|CID";
+
+  district_arr[24] = "Ariyalur|Chennai|Coimbatore|Coimbatore City|Cuddalore|Dharmapuri|Dindigul|Erode|Kanchipuram|Kanyakumari|Karur|Krishnagiri|Madurai|Madurai City|Nagapattinam|Namakkal|Nilgiris|Perambalur|Pudukottai|Ramnathapuram|Railway Chennai|Railway Trichy|Salem|Salem City|Sivagangai|Thanjavur|Theni|Thirunelveli|Thirunelveli City|Thiruvallur|Thiruvannamalai|Thiruvarur|Thoothukudi|Tiruppur|Tiruppur City|Trichy|Trichy City|Vellore|Villupuram|Virudhunagar|Cyber Cell|Other Units|Chengalpattu|Kallakurichi|Ranipet|Tiruppattur|Tenkasi";
+
+  district_arr[25] = "Cyberabad Commissionerate|Hyderabad Commissionerate|Karimnagar Commissionerate|Khammam Commissionerate|Nizamabad Commissionerate|Rachakonda Commissionerate|Ramagundam Commissionerate|Siddipet Commissionerate|Warangal Commissionerate|Adilabad|Bhadradri Kothagudem|Jagityal|Jayashankar Bhupalpalli|Jogulamba Gadwal|Kamareddy|Kumaram Bheem Asifabad|Mahabubabad|Mahabubnagar|Medak|Nagarkurnool|Nalgonda|Nirmal|Rajanna Siricilla|Sangareddy|Suryapet|Vikarabad|Wanaparthy|Railway Police Secunderabad|Mulug|Narayanpet";
+
+  district_arr[26] = "Dhalai|Gomati|Khowai|North Tripura|Sipahijala|South Tripura|Unakoti|West Tripura";
+
+  district_arr[27] = "Agra|Aligarh|Prayagraj|Ambedkar Nagar|Amethi|Amroha|Auraiya|Azamgarh|Badaun|Baghpat|Bahraich|Ballia|Balrampur|Banda|Barabanki|Bareilly|Basti|Bijnor|Bulandshahar|Chandoli|Chitrakoot|Deoria|Etah|Etawah|Ayodhya|Fatehgarh|Fatehpur|Firozabad|GRP|Gautambudh Nagar|Ghaziabad|Ghazipur|Gonda|Gorakhpur|Hamirpur|Hapur|Hardoi|Hathras|Jalaun|Jaunpur|Jhansi|Kannauj|Kanpur Dehat|Kanpur Commissionarate|Kasganj|Kaushambi|Khiri|Kushi Nagar|Lalitpur|Lucknow Commissionarate|Maharajganj|Mahoba|Mainpuri|Mathura|Mau|Meerut|Mirzapur|Moradabad|Muzaffarnagar|Pilibhit|Pratapgarh|Raibareilly|Rampur|Saharanpur|Sambhal|Sant Kabirnagar|Shahjahanpur|Shamli|Shrawasti|Sidharthnagar|Sitapur|Sonbhadra|Bhadohi|Sultanpur|Unnao|Varanasi Commissionarate|Lucknow Grameen|Kanpur Outer|Vasanasi Dehat";
+
+  district_arr[28] = "Almora|Bageshwar|Chamoli|Champawat|Dehradun|Haridwar|Nainital|Pauri Garhwal|Pithoragarh|Rudra Prayag|Tehri Garhwal|Udhamsingh Nagar|Uttarkashi|GRP|Cyber Cell";
+
+  district_arr[29] = "Alipurduar|Asansol-Durgapur PC|Bankura|Barrackpur PC|Bidhannagar PC|Birbhum|Coochbehar|Dakshin Dinajpur|Darjeeling|Hooghly Rural Police|Howrah GRP|Howrah PC|Howrah Rural|Jalpaiguri|Jhargram|Kharagpur GRP|Kolkata|Malda|Murshidabad Police District|Paschim Medinipur|Purab Medinipur|Purulia|Sealdah GRP|Siliguri GRP|Siliguri PC|Baruipur Police|Chandannagar PC|Diamond Harbour Police|Kalimpong|Purba Bardhaman|Sundarban Police|Barasat|Basirhat|Bangaon|Islampur|Jangipur Police District|Krishnagar|Raiganj|Ranaghat";
+
+
+
+  district_arr[30] = "South Andaman|North & Middle Andaman|Nicobar";
+
+  district_arr[31] = "Chandigarh";
+
+  district_arr[32] = "D&N Haveli|Daman|Diu";
+
+
+  district_arr[33] = "Central|Crime Branch|East|EOW|IGI Airport|Metro|New Delhi|North|North-East|North-West|Outer|RAILWAY|South|South-East|South-West|Spl Cell|SPUWAC|Vigilance|SPUWAC|West|Rohini|Shahdara|Dwarka|Outer North";
+
+  district_arr[34] = "Lakshadweep";
+
+  district_arr[35] = "Karaikal|Pudcherry";
+
+
+  function populateDistricts(stateElementId, districtElementId) 
+  {
+    var selectedStateIndex = document.getElementById(stateElementId).selectedIndex;
+    var districtElement = document.getElementById(districtElementId);
+    districtElement.length = 0;
+    districtElement.options[0] = new Option('Select district', '');
+    districtElement.selectedIndex = 0;
+    var district_ar = district_arr[selectedStateIndex].split("|");
+    for (var i = 0; i < district_ar.length; i++) 
+    {
+      districtElement.options[districtElement.length] = new Option(district_ar[i], district_ar[i]);
+    }
+  }
+
+  function populateStates(stateElementId, districtElementId)
+  {
+    // given the id of the <select> tag as function argument, it inserts <option> tags
+    var stateElement = document.getElementById(stateElementId);
+    stateElement.length = 0;
+    stateElement.options[0] = new Option('Select state', '-1');
+    stateElement.selectedIndex = 0;
+    for (var i = 0; i < states_arr.length; i++)
+    {
+      stateElement.options[stateElement.length] = new Option(states_arr[i], states_arr[i]);
+    }
+
+    // Assigned all countries. Now assign event listener for the states.
+
+    if (districtElementId) 
+    {
+      stateElement.onchange = function () 
+      {
+        populateDistricts(stateElementId, districtElementId);
+      };
+    }
+  }
+</script>
+
+<section class="why_section layout_padding" style="background-color: #f8f9fa; padding: 10px 0;">
+  <div class="container">
       <div class="heading_container heading_center">
-        <h2>
-          Crime Data <span>Statistics</span>
-        </h2>
+          <h2 style="font-size: 36px; font-weight: bold; color: #333; margin-bottom: 10px;">Crime Data <span style="color: #333;">Statistics</span></h2>
       </div>
-      <div class="accordion mt-5" id="accordionExample">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingOne">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-              Visualize a District's Crime Data 
-            </button>
-          </h2>
-          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              <form action="{% url "home:crimestatistics" %}" method="POST">
-                {% csrf_token %}
-              <input type="text" id="district" name="district"  placeholder="Enter district name..." onkeyup="showDistrict()"/><br/>
-              <input type="text" hidden name="type" value="district"/><br/>
-              <button type="submit" class="btn btn-primary mt-2 btn-sm">Get Data</button>
-              </form>
-            </div>
+      <div class="accordion mt-5" id="accordionExample" style="padding: 0;">
+          <div class="accordion-item" style="margin-bottom: 20px;">
+              <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="color: #ffffff; background-color: #0f054c;border-radius: 5px; padding: 10px 20px; font-size: 18px; border: none;">
+                      Visualize a District's Crime Data
+                  </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                      <form action="{% url "home:crimestatistics" %}" method="POST">
+                          {% csrf_token %}
+
+                          <!-- template.html -->
+
+                          <div class="form-group col-md-4" style="margin-bottom: 20px;">
+                              <label for="inputState" style="font-size: 16px; font-weight: bold; color: #333;">State</label>
+                              <select id="state_input" name="state_input" style="width: 200px; padding: 5px; margin-bottom: 10px;border-radius: 5px; display: block;menu-placement: bottom;"></select>
+                              <label for="inputState" style="font-size: 16px; font-weight: bold; color: #333;">District</label>
+                              <select name="district" id="district" style="width: 200px; padding: 5px;border-radius: 5px; display: block; menu-placement:bottom !important;"></select>
+
+                              <script language="javascript">
+                                  populateStates("state_input", "district");
+                              </script>
+                              <input type="text" hidden name="type" value="district" /><br />
+                              <button type="submit" class="btn btn-primary mt-2 btn-sm" style="color: #ffffff; background-color: #0f054c; border: none; padding: 10px 20px; border-radius: 5px; display: block; margin-top: 10px;">Get Data</button>
+                          </div>
+                      </form>
+                  </div>
+              </div>
           </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingTwo">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-              Compare two District's Crime Data
-            </button>
-          </h2>
-          <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              <form action="{% url "home:crimestatistics" %}" method="POST">
-                {% csrf_token %}
-              <input type="text"  id="district" name="district1"   placeholder="Enter district1 name..." onkeyup="showDistrict()"/><br/><br/>
-              <input type="text" id="district" name="district2"   placeholder="Enter district2 name..." onkeyup="showDistrict()"/><br/>
-              <input type="text" hidden name="type" value="district2"/><br/>
-              <button type="submit" class="btn btn-primary mt-2 btn-sm">Get Data</button>
-              </form>
-            </div>
+          <div class="accordion-item" style="margin-bottom: 20px;">
+              <h2 class="accordion-header" id="headingTwo">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="color: #ffffff; background-color: #0f054c; border-radius: 5px; padding: 10px 20px; font-size: 18px; border: none;">
+                      Compare two District's Crime Data
+                  </button>
+              </h2>
+              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                      <form action="{% url "home:crimestatistics" %}" method="POST">
+                          {% csrf_token %}
+                          <div class="form-group col-md-4" style="margin-bottom: 20px;">
+                              <label for="inputState" style="font-size: 16px; font-weight: bold; color: #333;">State1</label>
+                              <select id="state_input1" name="state_input" style="width: 200px; padding: 5px; margin-bottom: 10px;border-radius: 5px; display: block;menu-placement: bottom !important;"></select>
+                              <label for="inputState" style="font-size: 16px; font-weight: bold; color: #333;">District1</label>
+                              <select name="district1" id="district1" style="width: 200px; padding: 5px;border-radius: 5px; display: block;menu-placement: bottom !important;"></select></br>
+                              <label for="inputState" style="font-size: 16px; font-weight: bold; color: #333;">State2</label>
+                              <select id="state_input2" name="state_input" style="width: 200px; padding: 5px; margin-bottom: 10px;border-radius: 5px; display: block;menu-placement: bottom !important;;"></select>
+                              <label for="inputState" style="font-size: 16px; font-weight: bold; color: #333;">District2</label>
+                              <select name="district2" id="district2" style="width: 200px; padding: 5px;border-radius: 5px; display: block;menu-placement: bottom !important;"></select>
+                              <input type="text" hidden name="type" value="district2" /><br>
+                              <button type="submit" class="btn btn-primary mt-2 btn-sm" style="color: #ffffff; background-color: #0f054c; border: none; padding: 10px 20px; border-radius: 5px; display: block; margin-top: 10px;">Get Data</button>
+                              <script language="javascript">
+                                  populateStates("state_input1", "district1");
+                                  populateStates("state_input2", "district2");
+                              </script>
+                          </div>
+                      </form>
+                  </div>
+              </div>
           </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingThree">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-              Visualize a State's Crime Data
-            </button>
-          </h2>
-          <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              <form action="{% url "home:crimestatistics" %}" method="POST">
-                {% csrf_token %}
-              <input type="text" id="state" name="state"  placeholder="Enter State name..." onkeyup="showDistrict()"/><br/>
-              <input type="text" hidden name="type" value="state"/><br/>
-              <button type="submit" class="btn btn-primary mt-2 btn-sm">Get Data</button>
+          <div class="accordion-item" style="margin-bottom: 20px;">
+              <h2 class="accordion-header" id="headingThree">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="color: #ffffff; background-color: #0f054c; border-radius: 5px; padding: 10px 20px; font-size: 18px; border: none;">
+                      Visualize a State's Crime Data
+                  </button>
+              </h2>
+              <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                      <form action="{% url "home:crimestatistics" %}" method="POST">
+                          {% csrf_token %}
+                          <div class="form-group col-md-4" style="margin-bottom: 20px;">
+                              <label for="inputState" style="font-size: 16px; font-weight: bold; color: #333;">State</label>
+                              <select class="form-control" id="state" name="state" style="width: 200px; padding: 5px; margin-bottom: 10px;border-radius: 5px; display: block;menu-placement: bottom;">
+                                  <option value="SelectState">Select State</option>
+                                  <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                  <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                    <option value="Assam">Assam</option>
+                                    <option value="Bihar">Bihar</option>
+                                    <option value="Chhattisgarh">Chhattisgarh</option>
+                                    <option value="Goa">Goa</option>
+                                    <option value="Gujarat">Gujarat</option>
+                                    <option value="Haryana">Haryana</option>
+                                    <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                    <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                                    <option value="Jharkhand">Jharkhand</option>
+                                    <option value="Karnataka">Karnataka</option>
+                                    <option value="Kerala">Kerala</option>
+                                    <option value="Madya Pradesh">Madya Pradesh</option>
+                                    <option value="Maharashtra">Maharashtra</option>
+                                    <option value="Manipur">Manipur</option>
+                                    <option value="Meghalaya">Meghalaya</option>
+                                    <option value="Mizoram">Mizoram</option>
+                                    <option value="Nagaland">Nagaland</option>
+                                    <option value="Odisha">Odisha</option>
+                                    <option value="Punjab">Punjab</option>
+                                    <option value="Rajasthan">Rajasthan</option>
+                                    <option value="Sikkim">Sikkim</option>
+                                    <option value="Tamil Nadu">Tamil Nadu</option>
+                                    <option value="Telangana">Telangana</option>
+                                    <option value="Tripura">Tripura</option>
+                                    <option value="Uttaranchal">Uttaranchal</option>
+                                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                    <option value="West Bengal">West Bengal</option>
+                                    <option disabled style="background-color:#aaa; color:#fff">UNION Territories</option>
+                                    <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                                    <option value="Chandigarh">Chandigarh</option>
+                                    <option value="D and N Haveli and Daman and Diu">D and N Haveli and Daman and Diu</option>
+                                    <option value="Delhi">Delhi</option>
+                                    <option value="Ladakh">Ladakh</option>
+                                    <option value="Lakshadeep">Lakshadeep</option>
+                                    <option value="Puducherry">Puducherry</option>
+                                  <!-- Rest of the options -->
+                              </select>
+                          </div>
+                          <input type="text" hidden name="type" value="state" /><br />
+                          <button type="submit" class="btn btn-primary mt-2 btn-sm" style="color: #ffffff; background-color: #0f054c; border: none; padding: 10px 20px; border-radius: 5px; display: block; margin-top: 10px;">Get Data</button>
+                      </form>
+                  </div>
+              </div>
           </div>
-        </div>
       </div>
       <div id="graphs-container">
-        <div class="container">
-          {% if district or state %}
-          <div class="display-flex justify-content-center align-items-center mt-3">
-           {% for img in images %}
-              {{img | safe}}
-           {% endfor %}
+          <div class="container">
+              {% if district %}
+              <div class="display-flex justify-content-center align-items-center mt-3">
+                  {% for img in images %}
+                  {{img | safe}}
+                  {% endfor %}
+              </div>
+              {% endif %}
           </div>
-          {% endif %}
       </div>
-      </div>
-  </section>
+  </div>
+</section>
+
+
+
+
+
+  
+ 
+  
 
   <!-- end why section -->
 
   <!-- info section -->
 
-  <section class="info_section layout_padding2">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 col-lg-3 info_col">
-          <div class="info_contact">
-            <h4>
-              Address
-            </h4>
-            <div class="contact_link_box">
-              <a href="">
-                <i class="fa fa-map-marker" aria-hidden="true"></i>
-                <span>
-                  Location
-                </span>
-              </a>
-              <a href="">
-                <i class="fa fa-phone" aria-hidden="true"></i>
-                <span>
-                  Call +01 1234567890
-                </span>
-              </a>
-              <a href="">
-                <i class="fa fa-envelope" aria-hidden="true"></i>
-                <span>
-                  demo@gmail.com
-                </span>
-              </a>
-            </div>
-          </div>
-          <div class="info_social">
-            <a href="">
-              <i class="fa fa-facebook" aria-hidden="true"></i>
-            </a>
-            <a href="">
-              <i class="fa fa-twitter" aria-hidden="true"></i>
-            </a>
-            <a href="">
-              <i class="fa fa-linkedin" aria-hidden="true"></i>
-            </a>
-            <a href="">
-              <i class="fa fa-instagram" aria-hidden="true"></i>
-            </a>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3 info_col">
-          <div class="info_detail">
-            <h4>
-              Info
-            </h4>
-            <p>
-              necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful
-            </p>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-2 mx-auto info_col">
-          <div class="info_link_box">
-            <h4>
-              Links
-            </h4>
-            <div class="info_links">
-              <a class="active" href="/">
-                Home
-              </a>
-              <a class="" href="about.html">
-                About
-              </a>
-              <a class="" href="service.html">
-                Services
-              </a>
-              <a class="" href="why.html">
-                Why Us
-              </a>
-              <a class="" href="team.html">
-                Team
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3 info_col ">
-          <h4>
-            Subscribe
-          </h4>
-          <form action="#">
-            <input type="text" placeholder="Enter email" />
-            <button type="submit">
-              Subscribe
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- end info section -->
-
-  <!-- footer section -->
-  <section class="footer_section">
-    <div class="container">
-      <p>
-        &copy; <span id="displayYear"></span> All Rights Reserved By
-        <a href="https://html.design/">Free Html Templates</a>
-      </p>
-    </div>
-  </section>
+  
+  
   <!-- footer section -->
 
   {% endblock %}

@@ -26,13 +26,12 @@
     <div class="row justify-content-center">
         <div class="col-lg-6">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header" style="color: #ffffff; background-color: #0f054c;">
                     <h3 class="card-title">Sign In</h3>
                 </div>
                 <div class="card-body">
                     <form method="post" action="{% url 'account_login' %}">
                         {% csrf_token %}
-                        
                         <div class="mb-3">
                             <label for="login" class="form-label">Username or Email</label>
                             {% render_field form.login id="login" name="login" type="text" class="form-control" %}
@@ -50,12 +49,10 @@
                         </div>
                         
                         <div class="form-footer">
-                            <button type="submit" class="btn btn-primary">Sign In</button>
-                            <p class="mt-3">
-                                Don't have an account? <a href="{% url 'account_signup' %}">Sign Up</a>
-                            </p>
-                            <p>
-                                <a href="{% url 'account_reset_password' %}">Forgot Password?</a>
+                            <button type="submit" class="btn btn-primary" style="color: #ffffff; background-color: #0f054c; ">Sign In</button>
+                            
+                            <p style="color: #0f054c">
+                                <a href="{% url 'account_reset_password' %}" style="color: #0f054c;" >Forgot Password?</a>
                             </p>
                         </div>
                     </form>

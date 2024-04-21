@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container p-5" style="margin-top: 50px; width: 100%;">
+    <div class="row ">
+        <div class="col-lg-16">
+            <div class="card" style="border: 1px solid #ccc; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+                <div class="card-header" style="color: #ffffff; background-color: #0f054c; border-bottom: 1px solid #ccc; padding: 10px;">
+                    <h3 class="card-title" style="margin: 0;">Scam Reports in {{ selected_district }}</h3>
+                </div>
+                <div class="card-body">
+                    {% if scam_reports %}
+                        <div class="row">
+                            {% for scam_report in scam_reports %}
+                                <div class="col-md-3">
+                                    <div class="scam-report" style="margin-bottom: 10px;"> <!-- Reduced margin-bottom value -->
+                                        <div class="news_img">
+                                            <img width="250px" class="review-img" src="{{ scam_report.image.url }}" alt="Scam Image">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="scam-details" style="margin-bottom: 10px;"> <!-- Reduced margin-bottom value -->
+                                        <p><strong>Report by {{ scam_report.user }}</strong></p>
+                                        <p><strong>Description:</strong> {{ scam_report.scam_description }}</p>
+                                        
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p>No scam reports found for this district.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

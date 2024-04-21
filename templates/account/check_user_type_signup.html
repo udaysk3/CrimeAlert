@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% comment %} {% load allauth i18n %} {% endcomment %}
+{% block content %}
+<div class="container" style="margin-top: 100px;">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card" style="border: 1px solid #ccc; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+                <div class="card-header" style="color: #ffffff; background-color: #0f054c; border-bottom: 1px solid #ccc; padding: 10px;">
+                    <h3 class="card-title" style="margin: 0;">Check User Type</h3>
+                </div>
+                <div class="card-body" style="padding: 20px;">
+                    <p>Please select the User Type</p>
+                    {% url 'check-user-type' as action_url %}
+                    <form method="post" action="{{ action_url }}">
+                        {% csrf_token %}
+                        <div class="form-check" style="margin-bottom: 10px;">
+                            <input class="form-check-input" type="radio" name="user_type" value="police"  id="user_type1" style="margin-right: 5px;">
+                            <label class="form-check-label" for="user_type1" style="margin-left: 5px;">
+                              Police
+                            </label>
+                          </div>
+                          <div class="form-check" style="margin-bottom: 10px;">
+                            <input class="form-check-input" type="radio" name="user_type" value="user"  id="user_type2"   checked style="margin-right: 5px;">
+                            <label class="form-check-label" for="user_type2" style="margin-left: 5px;">
+                              Citizen
+                            </label>
+                          </div>
+                        <div class="form-footer" style="align:center; padding-left:170px;">
+                            <button type="submit" class="btn btn-primary" style="width: 40%; padding: 10px;  color: #ffffff; background-color: #0f054c; border: none; border-radius: 5px; align:center; cursor: pointer;">Go to signup</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
