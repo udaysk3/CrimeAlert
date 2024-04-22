@@ -39,6 +39,8 @@ def predict(request):
             "day": column_1.dt.day,
             "hour": column_1.dt.hour,
             "dayofyear": column_1.dt.dayofyear,
+            # "week":  (column_1.dt.day - 1) // 7 + 1,  # Get week
+            "week": column_1.dt.isocalendar().week,  # Get week of the year
             "weekofyear": column_1.dt.isocalendar().week,  # Get week of the year
         })
         data = data.drop('timestamp', axis=1)
